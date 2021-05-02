@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144525485-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-144525485-1');
+	</script>
+	<meta charset="UTF-8">
+	<title>Energy Forecasting</title>
+	<link rel="stylesheet" href="main.css">
+	<link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Open+Sans" rel="stylesheet">
+	<!-- favicon -->
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡️</text></svg>">
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+	<script src="main.js"></script>
+	<!-- social media preview -->
+	<meta property="og:title" content="An electric utility’s 3-part guide to peak shaving with neural networks."/>
+	<meta property="og:description" content="A collection of energy forecast research, improving efficiency and saving utilities money."/> 
+	<meta property="og:image" content="https://www.brownanalytics.com/energy_research/img/header.png" />
+</head>
+<body>
+	<header>
+		<div id="title">Energy<br>Forecasting</div>
+	</header>
+	<div class="post" id="disclaimers">
+			<div>In conjunction with <a href="https://omf.coop/" target="_blank">the Open Modeling Framework (OMF).</a></div>
+			<div>Originally posted in <a href="https://towardsdatascience.com/an-electric-utilitys-3-part-guide-to-peak-shaving-with-neural-networks-de5c7752d946" target="_blank">Towards Data Science</a>.</div>
+			<div>Explore the <a href="../index.html">rest of the site</a> to view more projects.</div>
+	</div>
+	<nav class="post" id="outline">
+
+		<div id="outline_main_title">An electric utility’s 3-part guide to peak shaving with neural networks.</div>
+		<hr>
+		<div class="part">
+			<div class="part_header">PART I</div>
+			<div class="part_title">What’s tomorrow’s load?</div>
+				<div class="article_container" id="ac_std_pred">
+					<div class="outline_title">Using neural nets to predict tomorrow’s electric consumption</div>
+					<div class="outline_subtitle">The smallest error can lose utilities thousands of dollars in a single day. Neural networks can help make sure that doesn’t happen.</div>
+					<div class="outline_date">March 7, 2019</div>
+					<h4><a href="#std_pred">Jump to article...</a></h4>
+					<div class="outline_takeaways">
+						<h4>Main takeaways:</h4>
+						<ul>
+							<li>To get any kind of useful energy consumption forecast, simple machine learning isn’t appropriate. Deep learning, however, can get us the accuracy we need.</li>
+							<li>Given historical load and temperature data, a straightforward neural network can give a 24-hour forecast with about 97 percent accuracy.</li>
+						</ul>
+					</div>
+				</div>
+				<div class="article_container" id="ac_td_pred">
+					<div class="outline_title">Predict daily electric consumption with neural networks.</div>
+					<div class="outline_subtitle">How a simple three-dimensional structure reduces error, outcompetes more complex models, and doubles savings.</div>
+					<div class="outline_date">January 23, 2020</div>
+					<h4><a href="#td_pred">Jump to article...</a></h4>
+					<div class="outline_takeaways">
+						<h4>Main takeaways:</h4>
+						<ul>
+							<li>A day-long approach to load forecasting is more accurate than an hour-by-hour approach.</li>
+							<li>Despite having only a 1 MAPE difference in error between the two approaches, tests showed the method doubling our savings when peak shaving due to less eratic output.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="part">
+				<div class="part_header">PART II</div>
+				<div class="part_title">But is it the monthly peak?</div>
+					<div class="article_container" id="ac_long_term">
+						<div class="outline_title">How short-term forecasting with neural nets can inform long-term decisions</div>
+						<div class="outline_subtitle">Electric utilities can detect monthly peaks with only a three-day forecast.</div>
+						<div class="outline_date">September 2, 2019</div>
+						<h4><a href="#long_term">Jump to article...</a></h4>
+						<div class="outline_takeaways">
+							<h4>Main takeaways:</h4>
+							<ul>
+								<li>Making peak shaving dispatches every day can be costly.</li>
+								<li>Multi-day forecasts can help us dramatically reduce the number of dispatches per month without the risk of missing the monthly peak.</li>
+								<li>Utilities would need to set their own priorities, but for the most part, they can dispatch only once every week or so while only missing one peak every few years.</li>
+							</ul>
+						</div>
+					</div>
+			</div>
+			<hr>
+			<div class="part">
+				<div class="part_header">PART III</div>
+				<div class="part_title">Okay, we’re dispatching. How much should we trust the forecast?</div>
+					<div class="article_container" id="ac_heat_equ">
+						<div class="outline_title">Peak shaving with unreliable forecasts</div>
+						<div class="outline_subtitle">How one 19th-century physics equation can increase electric utilities’ savings by more than 60 percent.</div>
+						<div class="outline_date">September 4, 2019</div>
+						<h4><a href="#heat_equ">Jump to article...</a></h4>
+						<div class="outline_takeaways">
+							<h4>Main takeaways:</h4>
+							<ul>
+								<li>Because there’s inevitably errors in our forecast, the “optimal” dispatch solution for the forecast won’t necessarily be the best dispatch in practice.</li>
+								<li>The heat equation can be used to spread out our dispatches (e.g. if our predicted forecast would suggest dispatching 500kW at 12pm, the equation might return 150kW at 11am, 200kW at 12pm, and 150kW at 1pm.)</li>
+								<li>This simple approach can save a lot of money. Savings in one region was increased by more than 60%.</li>
+								<li>The equation requires two constants as inputs, but they shouldn’t be hard for a utility to optimize.</li>
+							</ul>
+						</div>
+					</div>
+			</div>
+	</nav>
+	<div id="below">
+		<img src="img/top.svg" id="top" alt="">
+	<!-- below indented -->
+	<div class="post" id="std_pred">
+		<div class="title_card">
+			<img class="header_img" src="img/std_pred_header.png" alt="">	
+			<div class="title_text">
+				<div class="blog_title">Using neural nets to predict tomorrow’s electric consumption</div>
+				<div class="blog_subtitle">The smallest error can lose utilities thousands of dollars in a single day. Neural networks can help make sure that doesn’t happen.</div>
+				<div class="date">March 7, 2019</div>
+			</div>
+		</div>
+		<div class="content">
+			<p>
+				Electricity distributors stand to save hundreds of thousands of dollars by decreasing their peak demand charge. Some have tried to discharge batteries or turn off customers’ water heaters or air conditioners at peak hours to reduce their demand. But these efforts are only as effective as the utility’s ability to predict the day’s energy consumption.
+			</p>
+			<p>
+				The smallest inaccuracy can mean the difference between tens of thousands of dollars—implementing a peak-shaving strategy with incorrect load predictions can even increase demand cost. Thankfully, advances in deep learning and neural networks can offer utilities an incredibly accurate picture of the next day’s energy consumption. The Open Modeling Framework (OMF) and I have used neural networks to create a day-ahead load forecasting model that can be easily implemented to inform dispatch decisions.
+			</p>
+			<h1>Why not something simpler?</h1>
+			<p>
+				We initially created a linear regression model with the python package sci-kit learn. Although this simpler model achieved 10 mean absolute percent error (MAPE), it was not accurate enough to reduce peaks reliably.
+			</p>
+			<p>
+				The biggest obstacle was the difference in daily peaks between winter and summer months. Winter months peaked twice a day and summer months peaked in the middle of the day. A linear model cannot create these two daily load shapes at the same time. While linear regression can find simple relationships (+500kW because it’s Monday, -100kW because it’s March), a neural network can calculate more complicated relationships (+5100kW because it’s 3pm on a Monday in April, -1500kW because it’s 5am on Thanksgiving). This reduced our training error to roughly 3.5 MAPE, which translated to tens of thousands of dollars saved.
+			</p>
+
+			<img src="img/std_pred_1.png" alt="">
+
+			<h1>Software Details</h1>
+			<p>
+				In order to incorporate the load forecast software into the OMF database, our model is written in Python. We use the pandas package to manipulate data, and we have implemented Tensorflow’s Keras (Google’s machine learning software) to create a neural network. <a href="https://github.com/kmcelwee/mediumBlog/tree/master/load_forecast" target="_blank">Here is a link</a> to the repository. The code is easy to use:
+			</p>
+
+<!-- HTML generated using hilite.me -->
+<div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">import</span> <span style="color: #f8f8f2">loadForecast</span> <span style="color: #f92672">as</span> <span style="color: #f8f8f2">fc</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">pandas</span> <span style="color: #f92672">as</span> <span style="color: #f8f8f2">pd</span>
+<span style="color: #f8f8f2">df</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">pd</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">read_csv(</span><span style="color: #e6db74">&quot;test.csv&quot;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">all_X</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fc</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">makeUsefulDf(df)</span>
+<span style="color: #f8f8f2">all_y</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">df[</span><span style="color: #e6db74">&quot;load&quot;</span><span style="color: #f8f8f2">]</span>
+<span style="color: #f8f8f2">predictions,</span> <span style="color: #f8f8f2">accuracy</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fc</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">neural_net_predictions(all_X,</span> <span style="color: #f8f8f2">all_y)</span>
+</pre></div>
+
+			<p>
+				For our initial testing purposes, <span class="fixed">neural_net_predictions</span> simply returns the predictions for the final year; however, it can be quickly updated to work for a utility in real-time.
+			</p>
+			<h1>Structure</h1>
+			<p>
+				The structure of the neural network is continually being updated as we search for more accurate and efficient methods; however, we have currently settled on a five-layer, fully-connected network where each layer contains 71 nodes. We use a ReLU function in each layer and are minimizing mean squared error.
+			</p>
+			<h1>Inputs</h1>
+			<p>
+				We recommend that the model train on at least three years of data. The model takes a CSV as input, where each row lists the load and weather for a given year, month, day, and hour. If a utility doesn’t have temperature data available, OMF also offers “weatherPull,” a program that can easily collect and return hourly weather for a given zip code. If there are any null temperature values, the load forecast function uses the “forward fill” method, where null values are replaced by the last non-null value. For example, “38, 39, 41, NaN, NaN, 38, NaN, 32” would be read as “38, 39, 41, 41, 41, 38, 38, 32.”
+			</p>
+			<h1>Features</h1>
+			<p>
+				Although each training example contains the date, temperature, and weather data, we expand these three columns into 72 features that are useful for a machine learning model. Here is a list of all features:
+			</p>
+			<p>
+				<ul>
+					<li>Years since 2000*</li>
+					<li>Load from 24 hours before*</li>
+					<li>Hour of day (is12AM, is1AM, … is 11PM)</li>
+					<li>Day of the week (isSunday, isMonday, … isSaturday)</li>
+					<li>Month of the year (isJanuary, isFebruary, … is December)</li>
+					<li>Temperature* **</li>
+					<li>Temperature² ***</li>
+					<li>Previous day’s load* (12AM of day previous, 1AM of day previous, … 11PM of day previous)</li>
+					<li>Holidays (the NERC6 holidays)**** (isNewYears, isMemorialDay…isChristmas)</li>
+				</ul>
+			</p>
+			<p>
+				* These features are normalized by subtracting from the mean and dividing by the standard deviation, which helps collect all data points closely around zero. By dividing by the standard deviation instead of the range (as some data scientists suggest), we improved accuracy by one percent.
+			</p>
+			<p>
+				** The National Weather Service estimates that their day-ahead hourly weather forecast is often within 2.5 degrees. To replicate this, we create noise in the training and test temperature data by adding a gaussian distribution centered at zero with the standard deviation of 2.5. When this noise was added, the accuracy of the model dropped by one percent.
+			</p>
+			<p>
+				*** If you graph load against temperature, you’ll see that load is proportional to temperature²—heaters are used in the coldest temperatures and air conditioners in the hottest temperatures. By adding a temperature² feature, we can make this relationship more obvious to the model.
+			</p>
+			<p>
+				**** Observed holidays are also “1” (or “True”). For example, Independence Day 2015 was on a Saturday, so it was observed on Friday, July 3. Both July 3 and July 4 for 2015 are marked as “1” for the “isIndependenceDay” feature.
+			</p>
+			<h1>Results</h1>
+			<p>
+				We trained this neural net on ERCOT’s Houston data from 2002–2017 and tested the model against the load for 2018. We achieved roughly 96.5 percent accuracy (3.5 MAPE). The entire program often runs within 10 minutes. We deployed this neural net on a demand reduction model with a utility using batteries to shift load to reduce demand and found that we saved 40 percent of the optimal solution (e.g. if everything ran perfectly, the utility would save $95,000 on demand charge, but because forecasting isn’t perfect, it saved approximately $40,000. This assumes the typical $20/kW demand charge. Demand charge, among other values, is an input to our cost-benefit model, and we’re in process of extending these results to other utilities.)
+			</p>
+			<p>
+				There are more complicated machine learning structures that we are currently pursuing, given that the smallest improvements can have such a profound effect on a utility’s bottom line.
+			</p>
+			<p>
+				Also, it costs money to charge and discharge these large batteries, and some utilities can control their customers’ air conditioners a limited number of days. The next step in our research is to best predict what day of the month to dispatch these methods (assuming the demand charge is monthly), so that utilities can be as conservative as possible.
+			</p>
+		</div>
+	</div>
+	
+	<div class="post" id="td_pred">
+		<div class="title_card">
+			<img class="header_img" src="img/td_pred_header.png" alt="">	
+			<div class="title_text">
+				<div class="blog_title">Predict daily electric consumption with neural networks.</div>
+				<div class="blog_subtitle">How a simple three-dimensional structure reduces error, outcompetes more complex models, and doubles savings.</div>
+				<div class="date">January 23, 2020</div>
+			</div>
+		</div>
+		
+		<div class="content">
+			<p>
+				In early 2019, we <a href="#std_pred">built</a> a deep learning model that predicted electric consumption on an hour-by-hour basis. Because the smallest error can cost an electric utility tens of thousands of dollars, we explored a number of more complex forecasters. In the end we discovered that a simple day-long approach is the most effective, often cutting error in half.
+			</p>
+			<h1>THE STRUCTURE</h1>
+			<img src="img/td_pred_1.png" alt="">
+			<p>
+				In our previous model, we input all features we believed were relevant to a given hour's load: date, weather data, etc. A neural network then output that single hour's load prediction. This was repeated 72 times to give a 3-day forecast. For a more in-depth explanation, consider reading <a href="#std_pred">the original blog post</a>.
+			</p>
+			<p>
+				The new structure effectively combines 24 hourly models. But instead of calculating a single hour, we combine all weights into one flat, fully-connected dense layer (we settled on approx. 900 nodes). That layer is then fully connected to a 24-hour vector. We then repeat that over 3-days to give a 72-hour forecast.
+			</p>
+			<h2>Why should this work?</h2>
+			<p>
+				The main takeaway should be that the different hours "inform" each other. In our old model, we had a very direct method: given all these factors, what's this single hour's forecast? But in our new model, we can have all the factors that contribute to 4pm's load prediction influence 5pm's load prediction. If it's 30 degrees at 6am, shouldn't that effect whether heaters are still going by 9am? The neural network can identify these complex correlations and provide a more informed prediction.
+			</p>
+			<h2>How is this built?</h2>
+			<p>
+				Correctly preparing three-dimensional training data can be tricky. Here is the less-than-elegant function to appropriately group data to the dimensions needed.
+			</p>
+<!-- HTML generated using hilite.me -->
+<div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">data_transform</span><span style="color: #f8f8f2">(data,</span> <span style="color: #f8f8f2">timesteps,</span> <span style="color: #f8f8f2">var</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;x&#39;</span><span style="color: #f8f8f2">):</span>
+  <span style="color: #f8f8f2">m</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[]</span>
+  <span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">data</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_numpy()</span>
+  <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">range(s</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">timesteps):</span>
+      <span style="color: #f8f8f2">m</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">append(s[i:i</span><span style="color: #f92672">+</span><span style="color: #f8f8f2">timesteps]</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">tolist())</span>
+
+  <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">var</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;x&#39;</span><span style="color: #f8f8f2">:</span>
+      <span style="color: #f8f8f2">t</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros((len(m),</span> <span style="color: #f8f8f2">len(m[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]),</span> <span style="color: #f8f8f2">len(m[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">][</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])))</span>
+      <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">i,</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">enumerate(m):</span>
+          <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">j,</span> <span style="color: #f8f8f2">y</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">enumerate(x):</span>
+              <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">k,</span> <span style="color: #f8f8f2">z</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">enumerate(y):</span>
+                  <span style="color: #f8f8f2">t[i,</span> <span style="color: #f8f8f2">j,</span> <span style="color: #f8f8f2">k]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">z</span>
+  <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+      <span style="color: #f8f8f2">t</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">np</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">zeros((len(m),</span> <span style="color: #f8f8f2">len(m[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])))</span>
+      <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">i,</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">enumerate(m):</span>
+          <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">j,</span> <span style="color: #f8f8f2">y</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">enumerate(x):</span>
+              <span style="color: #f8f8f2">t[i,</span> <span style="color: #f8f8f2">j]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">y</span>
+
+  <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">t</span>
+
+<span style="color: #f8f8f2">all_y_rnn</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">data_transform(all_y,</span> <span style="color: #f8f8f2">HOURS_AHEAD,</span> <span style="color: #f8f8f2">var</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;y&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">all_X_rnn</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">data_transform(all_X,</span> <span style="color: #f8f8f2">HOURS_AHEAD,</span> <span style="color: #f8f8f2">var</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;x&#39;</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+<!--  -->
+			<p>
+				It is then fed into the following network:
+			</p>
+
+<!-- HTML generated using hilite.me -->
+<div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f8f8f2">HOURS_AHEAD</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">24</span>
+<span style="color: #f8f8f2">s</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">all_X</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+
+<span style="color: #f8f8f2">model</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">tf</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">keras</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Sequential()</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(layers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dense(s,</span> <span style="color: #f8f8f2">activation</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">tf</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">nn</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">relu,</span> <span style="color: #f8f8f2">input_shape</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">(HOURS_AHEAD,</span> <span style="color: #f8f8f2">all_X</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])))</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(layers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dense(s,</span> <span style="color: #f8f8f2">activation</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">tf</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">nn</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">relu))</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(layers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dense(s,</span> <span style="color: #f8f8f2">activation</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">tf</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">nn</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">relu))</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(layers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dense(s,</span> <span style="color: #f8f8f2">activation</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">tf</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">nn</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">relu))</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(layers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dense(s,</span> <span style="color: #f8f8f2">activation</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">tf</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">nn</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">relu))</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(layers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Flatten())</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(layers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dense(all_X</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">shape[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">HOURS_AHEAD</span><span style="color: #f92672">//</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">activation</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">tf</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">nn</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">relu))</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add(layers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Dense(HOURS_AHEAD))</span>
+
+<span style="color: #f8f8f2">nadam</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">tf</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">keras</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">optimizers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Nadam(learning_rate</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0.002</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">beta_1</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0.9</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">beta_2</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0.999</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">model</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">compile(optimizer</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">nadam,</span> <span style="color: #f8f8f2">loss</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;mape&#39;</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+<!--  -->
+			<h2>Why not a RNN?</h2>
+			<p>
+				A recurrent neural network, or RNN, would operate similarly to the network outlined above. But our testing with LSTMs and GRUs (two of the most popular RNN models) was unsuccessful. We were unable to produce models that outcompeted our simplest, hour-by-hour structure. In short, a traditional RNN structure seemed to make things worse.
+			</p>
+			<h2>Why 24-hours at a time?</h2>
+			<p>
+				In our short-term forecasting analysis, we often care about load in three-day increments (predictions further out quickly become useless). So why not train on a 72-hour vector? We technically can, but the costs don't outweigh the benefits. On our 24-hour prediction, the daily model runs three times slower than the hourly model, but the returns (as we'll see below) are very high. But as we increase to 48 or 72-hour predictions, the model severely slows with little improvement. At least for our purposes, it is better to separately train three, 24-hour models.
+			</p>
+			<h1>THE RESULTS</h1>
+			<p>
+				We tested the new model on Texas's "North Central" region. The data can be found <a href="https://github.com/kmcelwee/mediumBlog/tree/master/load_forecast/data" target="_blank">here</a>. While in reality the model would train daily, these models were strictly trained on the first 16 years of data (2002–2017) and tested on the final year (2018). To simulate weather forecasting uncertainty, we've added noise to historical weather data-Gaussian distributions with standard distributions of 2.5, 4, and 6 degrees for the 24, 48, and 72 hour groupings respectively.
+			</p>
+			<h2>Accuracy</h2>
+			<p>
+				The new model has a mean absolute percent error (MAPE) of 3 while the old model has a MAPE of 4 for the first 24 hours. But the hour-by-hour results are far more compelling.
+			</p>
+			<p>
+				The most significant issue is not only the MAPE, but the spread of errors (represented below as the interquartile range, or IQR). In developing our first model we discovered that when our hour-by-hour model was wrong, it was often *very* wrong. The reduced variance in the new model can help us communicate our uncertainty more confidently to utilities.
+			</p>
+			<img src="img/td_pred_2.png" alt="">
+			<div class="photo_caption">These models presume that the user would predict the following day's electric consumption at 11pm. So "0 Hours ahead" in the chart below would mean "12AM", "30 Hours ahead" is akin to "5AM in two-days", etc.</div>
+			<h2>Captured savings</h2>
+			<p>
+				And most importantly, the money saved! A 1 percentage point decrease in error may seem insignificant, but in 2018, this would have doubled Texas's peak shaving savings.
+			</p>
+			<p>
+				Assuming batteries with a 700kW charge and 500kW rating, we can calculate how much peak shaving could occur with perfect forecasting. You can capture 36 percent of optimal with our hourly neural network model. And by substituting the new model (no fancy <a href="#heat_equ">optimization under uncertainty analysis</a> included), we are able to capture 64 percent, almost doubling our savings!
+			</p>
+			<h1>Suggestions welcome!</h1>
+			<p>
+				We were unable to develop a proper RNN that outcompeted our model, but that doesn't mean that one doesn't exist.  The smallest increase in accuracy can profoundly help electric utilities, so if you think there's a structure we haven't considered, feel free to reach out!
+			</p>
+		</div>
+	</div>
+	
+	<div class="post" id="long_term">
+		<div class="title_card">
+			<img class="header_img" src="img/long_term_header.png" alt="">	
+			<div class="title_text">
+				<div class="blog_title">How short-term forecasting with neural nets can inform long-term decisions.</div>
+				<div class="blog_subtitle">Electric utilities can detect monthly peaks with only a three-day forecast.</div>
+				<div class="date">September 2, 2019</div>
+			</div>
+		</div>
+		
+		<div class="content">
+			<p>
+				For electric utilities, reducing monthly demand charge can be hugely profitable. Implementing a peak shaving strategy every day, however, could be costly. If a utility is using direct load control (paying customers to turn off air conditioners, water heaters, etc.), they may frustrate customers if they do so too frequently. If a utility uses storage, overuse can force them to replace expensive batteries more often than necessary. Therefore, it’s not only important to predict the load shape for the next day, but also to predict the month’s peak. In an ideal world, a utility with a monthly demand charge would need to shave peaks one day a month.
+			</p>
+			<p>
+				Unfortunately, similar to the weather predictions, load predictions get unreliable after a few days. Past three-day forecasts, our predictions level out at 10 mean absolute percent error (MAPE). And since it’s not uncommon for an entire month’s daily peaks to fall within a 10 MAPE band, finding monthly peaks quickly becomes guesswork.
+			</p>
+			<p>
+				Thankfully, by combining a few statistical techniques, we can place tomorrow’s forecast in context and dramatically reduce the number of days we dispatch.
+			</p>
+			<h1>THE SETUP</h1>
+			<p>
+				We’re motivated by a single question: is tomorrow this month’s peak?
+			</p>
+			<p>
+				We know that we can’t have a 30-day forecast, but by looking at three-day predictions, what’s already happened this month, and historical peaks, we can answer two smaller questions:
+			</p>
+			<p>
+				<ul>
+					<li>Will tomorrow be a local peak?</li>
+					<li>Is tomorrow’s load especially high for this month?</li>
+				</ul>
+			</p>
+			<p>
+				In the end, we’ll combine the answers to inform our motivating question.
+			</p>
+			<h2>Will tomorrow be a local peak?</h2>
+			<p>
+				A “local peak” would mean that tomorrow is the highest in a three-day forecast and also higher than any load already seen this month. In the beta version our web application, this is how it is represented:
+			</p>
+			<img src="img/long_term_1.png" alt="">
+			<p>
+				Above is a forecast for the 20th of December in the north central region of Texas in 2018. Because “tomorrow’s predicted peak” is considerably lower than the highest peak seen so far, a utility would not implement a peak shaving strategy on December 20th.
+			</p>
+			<p>
+				Considering that the model’s prediction is likely accurate around a normal distribution, we can assign a number to the statistical likelihood that tomorrow will be a local peak. It’s given by this formula:
+			</p>
+			<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 30px;">
+				<img style="width: 50%;"  src="img/long_term_2.png" alt="">
+				<div style="width: 50%;" class="photo_caption">Given two normal distributions (subscripts 1 and 2, defined by their mean and standard deviation), what is the likelihood that the sample X₁ will be greater than the sample X₂.</div>
+			</div>
+			
+			<p>
+				If you’re interested in the details, <a href="https://math.stackexchange.com/questions/40224/probability-of-a-point-taken-from-a-certain-normal-distribution-will-be-greater" target="_blank">here’s a link</a> to a full explanation. And below is how we expand that formula and translate it into python:
+			</p>
+<!-- HTML generated using hilite.me -->
+<div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">from</span> <span style="color: #f8f8f2">scipy.stats</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">norm</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">peak_likelihood</span><span style="color: #f8f8f2">(hist</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> 
+        <span style="color: #f8f8f2">tomorrow</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> <span style="color: #f8f8f2">tomorrow_std</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> 
+        <span style="color: #f8f8f2">two_day</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> <span style="color: #f8f8f2">two_day_std</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> 
+        <span style="color: #f8f8f2">three_day</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> <span style="color: #f8f8f2">three_day_std</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None):</span>
+    <span style="color: #e6db74">&#39;&#39;&#39;</span>
+<span style="color: #e6db74">    Given the predictions and standard deviation of the three-day forecast, in</span>
+<span style="color: #e6db74">    addition to the highest load so far this month, what is the likelihood that</span>
+<span style="color: #e6db74">    a sample from tomorrow&#39;s distribution will be higher than the other three.</span>
+<span style="color: #e6db74">    &#39;&#39;&#39;</span>
+    
+    <span style="color: #75715e"># likelihood that tomorrow is lower than highest so far this month</span>
+    <span style="color: #f8f8f2">A</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">norm(tomorrow,</span> <span style="color: #f8f8f2">tomorrow_std)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">cdf(hist)</span>
+    
+    <span style="color: #75715e"># likelihood that tomorrow is lower than than the two-day forecast</span>
+    <span style="color: #f8f8f2">B</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">norm(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">cdf(</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">(tomorrow</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">two_day)</span> <span style="color: #f92672">/</span> <span style="color: #f8f8f2">((tomorrow_std</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">two_day_std</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">**.</span><span style="color: #ae81ff">5</span><span style="color: #f8f8f2">))</span>
+    
+    <span style="color: #75715e"># likelihood that tomorrow is lower than than the three-day forecast</span>
+    <span style="color: #f8f8f2">C</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">norm(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">cdf(</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">(tomorrow</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">three_day)</span> <span style="color: #f92672">/</span> <span style="color: #f8f8f2">((tomorrow_std</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">three_day_std</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">**.</span><span style="color: #ae81ff">5</span><span style="color: #f8f8f2">))</span>
+    
+    <span style="color: #75715e"># likelihood tomorrow is (not A) AND (not B) AND (not C)</span>
+    <span style="color: #75715e"># in other words, what&#39;s the likelihood that tomorrow is local peak</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">round((</span><span style="color: #ae81ff">1</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">A)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">B)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">1</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">C)</span><span style="color: #f92672">*</span><span style="color: #ae81ff">100</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+			<p>
+				Using the example from December 20th and rounding to two decimals, the “local peak likelihood” for tomorrow is 0.0%, mostly because the area under the normal distribution for tomorrow’s peak is very small above the highest peak so far.
+			</p>
+			<h2>Is tomorrow’s load especially high for this month?</h2>
+			<p>
+				This question is simpler to answer. We look at the monthly data from previous years, and calculate the percentile of tomorrow’s prediction. It’s important to note that we’re calculating percentile with daily peaks, not hourly load.
+			</p>
+			<h2>What are we trying to minimize?</h2>
+			<p>
+				We have two factors, “local peak likelihood” and “peak percentile”, and we want to make a rule that will minimize two results, “percent of peaks missed” and “percent of dispatches made.”
+			</p>
+			<p>
+				These two results are tradeoffs that each utility must make. If they want to ensure that every peak is captured (low percent of peaks missed), they must dispatch every day (high percent of dispatches made). And vice versa: if they want to be conservative with the number of dispatches, they run the risk of missing a peak.
+			</p>
+			<p>
+				We need a single target to minimize. So for our purposes, we’ll simply add the two objectives. In the heat maps below, the function to minimize (right), is simply the sum of the other two. Naturally, considering a utility’s priorities, they would weigh this optimization function differently. Since there’s also a monetary aspect to this, a proper cost-benefit analysis would be necessary. But those calculations are unique to each utility.
+			</p>
+			<h1>THE RESULTS</h1>
+			<p>
+				I ran tests on ERCOT data from the various regions of Texas from 2002 to 2018. I ran the program from 2008 to 2018 so that the “peak percentile” variable had some hindsight. The entire testing process can be found in <a target="_blank" href="https://github.com/kmcelwee/mediumBlog/blob/master/load_forecast/Efficacy%20of%20short-term%20forecasts%20for%20predicting%20monthly%20peaks.ipynb">this jupyter notebook.</a>
+			</p>
+			<p>
+				I assumed that we had 97% accuracy for one-day forecasts, 95% accuracy for two-day forecasts, and 92% accuracy for three-day forecasts — results that are found commonly in academic literature and also reflected <a href="#std_pred">in our own testing.</a>
+			</p>
+			<img src="img/long_term_3.png" alt="">
+			<div class="photo_caption">Tests run on ERCOT’s SCENT data (San Antonio, Austin). Minimization of (% peaks missed + % dispatches made) for the two variables (“peak percentile threshold” and “local peak likelihood threshold”)</div>
+			<p>
+				Above is one example from the south central region of Texas. Note that there is a sharp line across the top of the center heat map. More than half of all daily peaks have a 0 percent chance of being a local peak, suggesting that regardless of the optimization method put in place by utilities, this method will immediately cut dispatches in half while rarely missing a peak. This band was revealed in all regions of Texas where this test was performed.
+			</p>
+			<div style="width: 50%; float: right; margin: 15px;">
+				<img src="img/long_term_4.png" alt="">
+				<div class="photo_caption">The regions of Texas used in testing.</div>
+			</div>
+			<p>
+				It’s important to note that the graphs above, and the results below use the logical “AND” when creating the dispatch rule (e.g. Dispatch if there is ≥ 4% chance of local peak AND tomorrow is ≥ the 99th percentile.) I also tested the logical “OR”, but results where consistently worse.
+			</p>
+			<p>
+				The results are tabulated in the figure below. Note that each of these “rules” are only accurate in hindsight. Each utility would need to test how effective previous policies can be implemented on future loads. As one might expect, there is no one-rule-fits-all when trying to predict monthly peaks. The consistent trend, however, is to dispatch if there is a greater-than single digit chance of a local peak, and if the forecast’s percentile is pretty high. (The results for NORTH are quite different than the rest of Texas, <a href="https://github.com/kmcelwee/mediumBlog/blob/master/load_forecast/NORTH.png" target="_blank">here is a link</a> to its heat map.)
+			</p>
+			<img style="width: 50%; float: left; margin: 15px;" src="img/long_term_5.png" alt="">
+			<p>
+				The results suggest that the “local peak likelihood” variable is doing most of the heavy lifting in this function, and the percentile factor is helping detect obvious non-peaks in a historical context.
+			</p>
+			<p>
+				It’s not lost on me that this optimization could also be aided by breaking down rules for each month, or even applying some kind of machine learning algorithm; however, because future load behavior can differ from the past based on changing technology and consumption patterns, those processes can easily fall victim to overfitting.
+			</p>
+			<p>
+				There is a great opportunity, however, for utilities to leverage machine learning and basic statistics to better inform their dispatch decisions, saving money and building customer trust in the process.
+			</p>
+		</div>
+	</div>
+		<div class="post" id="heat_equ">
+			<div class="title_card">
+			<img class="header_img" src="img/heat_equ_header.png" alt="">	
+			<div class="title_text">
+				<div class="blog_title">Peak shaving with unreliable forecasts</div>
+				<div class="blog_subtitle">How one 19th-century physics equation can increase electric utilities’ savings by more than 60 percent.</div>
+				<div class="date">September 4, 2019</div>
+			</div>
+		</div>
+		
+		<div class="content">
+			<p>
+				Even the best models for predicting energy consumption aren’t good enough to capture a majority of the possible value of peak shaving. When a forecast has just 3% error, it’s not unusual to lose half of possible savings as a consequence. Consider how the smallest inaccuracies dramatically affect these utilities’ expected savings from peak shaving (<a href="https://github.com/kmcelwee/mediumBlog/blob/master/load_forecast/How%20much%20value%20is%20captured%20with%20different%20prediction%20accuracy%3F.ipynb">testing here</a>):
+			</p>
+			<div style="text-align: center;"><img style="width: 500px;" src="img/heat_equ_1.png" alt=""></div>
+			<p>
+				With this in mind, it’s important to consider what kind of dispatch strategies utilities should deploy when factoring in the uncertainty surrounding the following day’s load prediction. Thankfully, we can use one equation to plan for that uncertainty, hedge our bets, and regain some of the value lost in imperfect predictions.
+			</p>
+			<h1>THE SETUP</h1>
+			<p>
+				The 3D heat equation is shown below. 3Blue1Brown’s <a href="https://www.youtube.com/watch?v=ly4S0oi3Yz8" target="_blank">introduction</a> to this topic served as the inspiration to this approach. For our purposes, all you need to know is that the heat equation is a convenient function to flatten curves while the area under the curve remains constant. We want to spread out our dispatches while still using all the resources available to us.
+			</p>
+			<img src="img/heat_equ_2_3.png" alt="">
+			
+			<div class="photo_caption">Left: The 3D heat equation, where T is temperature, alpha is some constant and t is time. Right: How the heat equation affects a curve. Source: 3Blue1Brown</div>
+			<p>
+				Consider a forecast for tomorrow’s load curve. We know that it’s generally right, to about 3 mean absolute percent error. We can’t put all of our eggs into one basket (i.e. put all of our battery dispatch into one hour). We calculate what’s the ideal storage dispatch on the forecasted load, and then apply the heat equation to spread out to nearby hours. This ensures that the smallest forecast error doesn’t lead to a significant drop in savings.
+			</p>
+			<p>
+				Here is the heat equation translated into python, and its effect on a storage dispatch:
+			</p>
+<!-- HTML generated using hilite.me -->
+<div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">heat</span><span style="color: #f8f8f2">(l,</span> <span style="color: #f8f8f2">alpha,</span> <span style="color: #f8f8f2">time_steps):</span>
+    <span style="color: #e6db74">&#39;&#39;&#39;apply the heat equation to list l, given constants alpha and time_steps&#39;&#39;&#39;</span>
+    <span style="color: #f8f8f2">return_l</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[]</span>
+    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">t</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">range(time_steps):</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">len(return_l)</span> <span style="color: #f92672">!=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #f8f8f2">l</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">return_l</span>
+            <span style="color: #f8f8f2">return_l</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[]</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">i,</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">enumerate(l):</span>
+            <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">==</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">:</span>
+                <span style="color: #f8f8f2">diff</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">l[i])</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(l[i]</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">l[i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])</span>
+                <span style="color: #f8f8f2">return_l</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">append(l[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">alpha</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">diff)</span>
+            <span style="color: #66d9ef">elif</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">len(l)</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span>
+                <span style="color: #f8f8f2">diff</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(l[i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">l[i])</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(l[i]</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
+                <span style="color: #f8f8f2">return_l</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">append(l[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">alpha</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">diff)</span>
+            <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+                <span style="color: #f8f8f2">diff</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(l[i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">l[i])</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">(l[i]</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">l[i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])</span>
+                <span style="color: #f8f8f2">return_l</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">append(l[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">alpha</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">diff)</span>
+
+    <span style="color: #75715e"># proportionally correct if boundaries hit, then return new list</span>
+    <span style="color: #f8f8f2">sum_r,</span> <span style="color: #f8f8f2">sum_l</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sum(return_l),</span> <span style="color: #f8f8f2">sum(l)</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">[round((sum_l</span> <span style="color: #f92672">/</span> <span style="color: #f8f8f2">sum_r)</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">x,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">x</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">return_l]</span> <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">sum_l</span> <span style="color: #f92672">!=</span> <span style="color: #f8f8f2">sum_r</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">return_l</span>
+</pre></div>
+			<img style="margin-top: 30px;" src="img/heat_equ_4.png" alt="">
+			<h2>Other details</h2>
+			<p>
+				The biggest mistake a utility can make is to attempt to charge a battery at the wrong time. In the numerous models that I’ve tested, batteries recharging mid-day have consistently <b>increased</b> the month’s peak. For this reason, it’s best to always play it safe and always charge when consumption is at an absolute low. From what I’ve gathered, this insurance strategy loses only about 1–2% of the optimal possible value captured, and is well worth it, at least until forecast prediction software gets considerably better.
+			</p>
+			<p>
+				In order to make the dispatch decisions, we use the linear programming python package <span class="fixed">puLP</span> . The details of the package can be found <a href="https://pythonhosted.org/PuLP/" target="_blank">here</a> — it’s very useful for any kind of operations research. We state an objective function like “minimize the maximum load” while providing the battery’s limitations.
+			</p>
+			<h1>THE RESULTS</h1>
+			<p>
+				I tested how the heat equation would impact revenue across the eight ERCOT regions of Texas from 2002 to 2018. To simulate prediction accuracy, I added a normal distribution of noise with 3% standard deviation around the load. I assumed that we had 700kW of storage, where a maximum of 500kW can be dispatched per hour. The functions and testing can be found in <a href="https://github.com/kmcelwee/mediumBlog/blob/master/load_forecast/How%20effective%20is%20the%20heat%20equation%3F.ipynb" target="_blank">this jupyter notebook.</a>
+			</p>
+			<p>
+				It’s important to clarify that tests were performed on every day’s peak to gather a larger sample. I rely on the assumption that there’s not a significant difference between monthly peaks and daily peaks.
+			</p>
+			<img src="img/heat_equ_5.png" alt="">
+			<div class="photo_caption">Percent of optimal value obtained if heat equation is applied with given values in the COAST region of ERCOT.</div>
+			<p>
+				The heat map above shows the percent of optimal value gained when various values of alpha and time step are applied. In ERCOT’s coastal region, if the heat equation is not applied, utilities would gather 28% of optimal peak shaving value. If heat equation is appropriately applied, they capture 46% of optimal.The results for each region of Texas is tabulated below. Every region could be helped by applying this spreading formula. This formula would increase savings anywhere from 20% to 64%.
+			</p>
+			<img src="img/heat_equ_6.png" alt="">
+			<p>
+				Furthermore, the constants that maximize savings are relatively similar for each region, suggesting that these constants are relatively stable over time and generalizable, though naturally, each utility would have to perform an independent analysis before applying them themselves.
+			</p>
+			<p>
+				A quick analysis on the NCENT region of Texas revealed that even with 99% accuracy, applying the heat equation would still improve savings. Until our prediction capabilities are as perfect as random effects allow, optimization formulas that take our uncertainty into consideration should be applied and perfected.
+			</p>
+		</div>
+	</div>
+	</div>	
+	<footer>
+			<div id="contact_container">
+				<a target="_blank" href="https://github.com/kmcelwee"><img class="icon" src="../img/icons/github-brands.svg" width="30px" alt=""></a>
+				<a target="_blank" href="https://www.linkedin.com/in/kevin-mcelwee/"><img class="icon" src="../img/icons/linkedin-brands.svg" width="30px" alt=""></a>
+				<a target="_blank" href="https://medium.com/@kevinrmcelwee"><img class="icon" src="../img/icons/medium-brands.svg" width="30px" alt=""></a>
+				<div id="llc"><a href="../index.html">Brown Analytics, LLC</a></div>
+			</div>
+	</footer>
+</body>
+</html>
