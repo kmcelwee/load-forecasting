@@ -94,7 +94,7 @@ We need a single target to minimize. So for our purposes, we’ll simply add the
 
 I ran tests on ERCOT data from the various regions of Texas from 2002 to 2018. I ran the program from 2008 to 2018 so that the “peak percentile” variable had some hindsight. The entire testing process can be found in [this jupyter notebook](https://github.com/kmcelwee/load-forecasting/blob/main/notebooks/Efficacy%20of%20short-term%20forecasts%20for%20predicting%20monthly%20peaks.ipynb).
 
-I assumed that we had 97% accuracy for one-day forecasts, 95% accuracy for two-day forecasts, and 92% accuracy for three-day forecasts — results that are found commonly in academic literature and also reflected [in our own testing.](% post_url simple-load-forecasting %})
+I assumed that we had 97% accuracy for one-day forecasts, 95% accuracy for two-day forecasts, and 92% accuracy for three-day forecasts — results that are found commonly in academic literature and also reflected [in our own testing.]({{site.base_url}}/simple-load-forecasting.html)
 
 ![](img/long_term_3.png)
 
@@ -106,7 +106,7 @@ Above is one example from the south central region of Texas. Note that there is 
 
 It’s important to note that the graphs above, and the results below use the logical “AND” when creating the dispatch rule (e.g. Dispatch if there is ≥ 4% chance of local peak AND tomorrow is ≥ the 99th percentile.) I also tested the logical “OR”, but results where consistently worse.
 
-The results are tabulated in the figure below. Note that each of these “rules” are only accurate in hindsight. Each utility would need to test how effective previous policies can be implemented on future loads. As one might expect, there is no one-rule-fits-all when trying to predict monthly peaks. The consistent trend, however, is to dispatch if there is a greater-than single digit chance of a local peak, and if the forecast’s percentile is pretty high. (The results for NORTH are quite different than the rest of Texas, [here is a link](https://github.com/kmcelwee/load-forecasting/blob/main/img/NORTH.png) to its heat map.)
+The results are tabulated in the figure below. Note that each of these “rules” are only accurate in hindsight. Each utility would need to test how effective previous policies can be implemented on future loads. As one might expect, there is no one-rule-fits-all when trying to predict monthly peaks. The consistent trend, however, is to dispatch if there is a greater-than single digit chance of a local peak, and if the forecast’s percentile is pretty high. (The results for NORTH are quite different than the rest of Texas, here is a link to its heat map.)
 
 ![](img/long_term_5.png){: style="float: right; width: 550px"}
 
