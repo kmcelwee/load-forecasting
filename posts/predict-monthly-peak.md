@@ -94,7 +94,7 @@ We need a single target to minimize. So for our purposes, we’ll simply add the
 
 I ran tests on ERCOT data from the various regions of Texas from 2002 to 2018. I ran the program from 2008 to 2018 so that the “peak percentile” variable had some hindsight. The entire testing process can be found in [this jupyter notebook](https://github.com/kmcelwee/load-forecasting/blob/main/notebooks/Efficacy%20of%20short-term%20forecasts%20for%20predicting%20monthly%20peaks.ipynb).
 
-I assumed that we had 97% accuracy for one-day forecasts, 95% accuracy for two-day forecasts, and 92% accuracy for three-day forecasts — results that are found commonly in academic literature and also reflected [in our own testing.](simple-load-forecasting.html)
+I assumed that we had 97% accuracy for one-day forecasts, 95% accuracy for two-day forecasts, and 92% accuracy for three-day forecasts — results that are found commonly in academic literature and also reflected [in our own testing.](% post_url simple-load-forecasting %})
 
 ![](img/long_term_3.png)
 

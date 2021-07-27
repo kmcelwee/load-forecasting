@@ -13,13 +13,13 @@ permalink: /day-long-load-forecasting
 
 *January 23, 2020*
 
-In early 2019, [we built](/simple-load-forecasting.html) a deep learning model that predicted electric consumption on an hour-by-hour basis. Because the smallest error can cost an electric utility tens of thousands of dollars, we explored a number of more complex forecasters. In the end we discovered that a simple day-long approach is the most effective, often cutting error in half.
+In early 2019, [we built]({% post_url simple-load-forecasting %}) a deep learning model that predicted electric consumption on an hour-by-hour basis. Because the smallest error can cost an electric utility tens of thousands of dollars, we explored a number of more complex forecasters. In the end we discovered that a simple day-long approach is the most effective, often cutting error in half.
 
 ### Structure
 
 ![structure diagram](../img/td_pred_1.png)
 
-In our previous model, we input all features we believed were relevant to a given hour's load: date, weather data, etc. A neural network then output that single hour's load prediction. This was repeated 72 times to give a 3-day forecast. For a more in-depth explanation, consider reading [the original blog post](/simple-load-forecasting.html).
+In our previous model, we input all features we believed were relevant to a given hour's load: date, weather data, etc. A neural network then output that single hour's load prediction. This was repeated 72 times to give a 3-day forecast. For a more in-depth explanation, consider reading [the original blog post](% post_url simple-load-forecasting %}).
 
 The new structure effectively combines 24 hourly models. But instead of calculating a single hour, we combine all weights into one flat, fully-connected dense layer (we settled on approx. 900 nodes). That layer is then fully connected to a 24-hour vector. We then repeat that over 3-days to give a 72-hour forecast.
 
@@ -103,7 +103,7 @@ These models presume that the user would predict the following day's electric co
 
 And most importantly, the money saved! A 1 percentage point decrease in error may seem insignificant, but in 2018, this would have doubled Texas's peak shaving savings.
 
-Assuming batteries with a 700kW charge and 500kW rating, we can calculate how much peak shaving could occur with perfect forecasting. You can capture 36 percent of optimal with our hourly neural network model. And by substituting the new model (no fancy [optimization under uncertainty analysis](calculate-uncertainty.html) included), we are able to capture 64 percent, almost doubling our savings!
+Assuming batteries with a 700kW charge and 500kW rating, we can calculate how much peak shaving could occur with perfect forecasting. You can capture 36 percent of optimal with our hourly neural network model. And by substituting the new model (no fancy [optimization under uncertainty analysis](% post_url calculate-uncertainty %}) included), we are able to capture 64 percent, almost doubling our savings!
 
 #### Suggestions welcome!
 
