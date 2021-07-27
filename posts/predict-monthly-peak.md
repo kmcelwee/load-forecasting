@@ -106,9 +106,19 @@ Above is one example from the south central region of Texas. Note that there is 
 
 It’s important to note that the graphs above, and the results below use the logical “AND” when creating the dispatch rule (e.g. Dispatch if there is ≥ 4% chance of local peak AND tomorrow is ≥ the 99th percentile.) I also tested the logical “OR”, but results where consistently worse.
 
-The results are tabulated in the figure below. Note that each of these “rules” are only accurate in hindsight. Each utility would need to test how effective previous policies can be implemented on future loads. As one might expect, there is no one-rule-fits-all when trying to predict monthly peaks. The consistent trend, however, is to dispatch if there is a greater-than single digit chance of a local peak, and if the forecast’s percentile is pretty high. (The results for NORTH are quite different than the rest of Texas, here is a link to its heat map.)
+The results are tabulated in the figure below. Note that each of these “rules” are only accurate in hindsight. Each utility would need to test how effective previous policies can be implemented on future loads. As one might expect, there is no one-rule-fits-all when trying to predict monthly peaks. The consistent trend, however, is to dispatch if there is a greater-than single digit chance of a local peak, and if the forecast’s percentile is pretty high. (The results for NORTH are quite different than the rest of Texas, [here is a link](https://github.com/kmcelwee/load-forecasting/blob/main/img/NORTH.png) to its heat map.)
 
-![](img/long_term_5.png){: style="float: right; width: 550px"}
+
+|Region|Most effective rule                                                                   |% days dispatched|% peaks missed|In layman's terms                                                   |
+|------|--------------------------------------------------------------------------------------|-----------------|--------------|--------------------------------------------------------------------|
+|NCENT |Dispatch if there is ≥ 4% chance of local peak and tomorrow is ≥ the 99th percentile. |18.05            |1.67          |By dispatching every 5-6 days, you’ll miss one peak every 5 years.  |
+|COAST |Dispatch if there is ≥ 2% chance of local peak and tomorrow is ≥ the 89th percentile. |20.74            |5.05          |By dispatching every 6 days, you’ll miss one peak every 2 years.    |
+|EAST  |Dispatch if there is ≥ 2% chance of local peak and tomorrow is ≥ the 68th percentile. |20.6             |5             |By dispatching every 6 days, you’ll miss one peak every 2 years.    |
+|FWEST |Dispatch if there is ≥ 5% chance of local peak and tomorrow is ≥ the 72nd percentile. |26               |6.67          |By dispatching every 8 days, you’ll miss one peak every 15 months.  |
+|NORTH |Dispatch if there is ≥ 4% chance of local peak and tomorrow is ≥ the 4th percentile.  |21               |6.67          |By dispatching every 6 days, you’ll miss one peak every 15 months.  |
+|SCENT |Dispatch if there is ≥ 11% chance of local peak and tomorrow is ≥ the 78nd percentile.|14.5             |6.67          |By dispatching every 4-5 days, you’ll miss one peak every 15 months.|
+|SOUTH |Dispatch if there is ≥ 3% chance of local peak and tomorrow is ≥ the 92nd percentile. |23.37            |0.83          |By dispatching every 7 days, you’ll miss one peak every 10 years.   |
+|WEST  |Dispatch if there is ≥ 6% chance of local peak and tomorrow is ≥ the 88th percentile. |18.77            |3.33          |By dispatching every 5-6 days, you’ll miss one peak every 3 years.  |
 
 The results suggest that the “local peak likelihood” variable is doing most of the heavy lifting in this function, and the percentile factor is helping detect obvious non-peaks in a historical context.
 

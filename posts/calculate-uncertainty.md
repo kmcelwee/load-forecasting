@@ -82,7 +82,17 @@ Percent of optimal value obtained if heat equation is applied with given values 
 
 The heat map above shows the percent of optimal value gained when various values of alpha and time step are applied. In ERCOT’s coastal region, if the heat equation is not applied, utilities would gather 28% of optimal peak shaving value. If heat equation is appropriately applied, they capture 46% of optimal.The results for each region of Texas is tabulated below. Every region could be helped by applying this spreading formula. This formula would increase savings anywhere from 20% to 64%.
 
-![](img/heat_equ_6.png)
+|Region|Percent captured w/o heat equation                                                    |Percent captured w/  heat equation|Percent savings increase|Optimal  alpha                                                      |Optimal  timestep|
+|------|--------------------------------------------------------------------------------------|----------------------------------|------------------------|--------------------------------------------------------------------|-----------------|
+|NCENT |35                                                                                    |45                                |28                      |0.2                                                                 |1                |
+|COAST |28                                                                                    |46                                |64                      |0.25                                                                |1                |
+|EAST  |58                                                                                    |72                                |25                      |0.25                                                                |1                |
+|FWEST |47                                                                                    |69                                |32                      |0.25                                                                |2                |
+|NORTH |62                                                                                    |76                                |23                      |0.25                                                                |1                |
+|SCENT |41                                                                                    |57                                |39                      |0.25                                                                |1                |
+|SOUTH |47                                                                                    |65                                |38                      |0.25                                                                |1                |
+|WEST  |63                                                                                    |76                                |20                      |0.25                                                                |1                |
+
 
 Furthermore, the constants that maximize savings are relatively similar for each region, suggesting that these constants are relatively stable over time and generalizable, though naturally, each utility would have to perform an independent analysis before applying them themselves.
 
