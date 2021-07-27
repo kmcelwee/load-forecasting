@@ -86,7 +86,7 @@ In our short-term forecasting analysis, we often care about load in three-day in
 
 ### Results
 
-We tested the new model on Texas's "North Central" region. ###The data can be found here###. While in reality the model would train daily, these models were strictly trained on the first 16 years of data (2002–2017) and tested on the final year (2018). To simulate weather forecasting uncertainty, we've added noise to historical weather data-Gaussian distributions with standard distributions of 2.5, 4, and 6 degrees for the 24, 48, and 72 hour groupings respectively.
+We tested the new model on Texas's "North Central" region. [The data can be found here.](https://github.com/kmcelwee/load-forecasting/tree/main/data) While in reality the model would train daily, these models were strictly trained on the first 16 years of data (2002–2017) and tested on the final year (2018). To simulate weather forecasting uncertainty, we've added noise to historical weather data-Gaussian distributions with standard distributions of 2.5, 4, and 6 degrees for the 24, 48, and 72 hour groupings respectively.
 
 #### Accuracy
 
@@ -103,7 +103,7 @@ These models presume that the user would predict the following day's electric co
 
 And most importantly, the money saved! A 1 percentage point decrease in error may seem insignificant, but in 2018, this would have doubled Texas's peak shaving savings.
 
-Assuming batteries with a 700kW charge and 500kW rating, we can calculate how much peak shaving could occur with perfect forecasting. You can capture 36 percent of optimal with our hourly neural network model. And by substituting the new model (no fancy ###optimization under uncertainty analysis### included), we are able to capture 64 percent, almost doubling our savings!
+Assuming batteries with a 700kW charge and 500kW rating, we can calculate how much peak shaving could occur with perfect forecasting. You can capture 36 percent of optimal with our hourly neural network model. And by substituting the new model (no fancy [optimization under uncertainty analysis](calculate-uncertainty.html) included), we are able to capture 64 percent, almost doubling our savings!
 
 #### Suggestions welcome!
 

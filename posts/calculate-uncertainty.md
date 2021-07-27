@@ -19,7 +19,7 @@ permalink: /calculate-uncertainty
 ## How one 19th-century physics equation can increase electric utilities’ savings by more than 60 percent.
 *September 4, 2019*
 
-Even the best models for predicting energy consumption aren’t good enough to capture a majority of the possible value of peak shaving. When a forecast has just 3% error, it’s not unusual to lose half of possible savings as a consequence. Consider how the smallest inaccuracies dramatically affect these utilities’ expected savings from peak shaving ###(testing here)###:
+Even the best models for predicting energy consumption aren’t good enough to capture a majority of the possible value of peak shaving. When a forecast has just 3% error, it’s not unusual to lose half of possible savings as a consequence. Consider how the smallest inaccuracies dramatically affect these utilities’ expected savings from peak shaving ([testing here](https://github.com/kmcelwee/load-forecasting/blob/main/notebooks/How%20much%20value%20is%20captured%20with%20different%20prediction%20accuracy%3F.ipynb)):
 
 With this in mind, it’s important to consider what kind of dispatch strategies utilities should deploy when factoring in the uncertainty surrounding the following day’s load prediction. Thankfully, we can use one equation to plan for that uncertainty, hedge our bets, and regain some of the value lost in imperfect predictions.
 
@@ -71,7 +71,7 @@ In order to make the dispatch decisions, we use the linear programming python pa
 
 ### The Results
 
-I tested how the heat equation would impact revenue across the eight ERCOT regions of Texas from 2002 to 2018. To simulate prediction accuracy, I added a normal distribution of noise with 3% standard deviation around the load. I assumed that we had 700kW of storage, where a maximum of 500kW can be dispatched per hour. The functions and testing can be found in ###this jupyter notebook.###
+I tested how the heat equation would impact revenue across the eight ERCOT regions of Texas from 2002 to 2018. To simulate prediction accuracy, I added a normal distribution of noise with 3% standard deviation around the load. I assumed that we had 700kW of storage, where a maximum of 500kW can be dispatched per hour. The functions and testing can be found in [this jupyter notebook.](https://github.com/kmcelwee/load-forecasting/blob/main/notebooks/How%20effective%20is%20the%20heat%20equation%3F.ipynb)
 
 It’s important to clarify that tests were performed on every day’s peak to gather a larger sample. I rely on the assumption that there’s not a significant difference between monthly peaks and daily peaks.
 

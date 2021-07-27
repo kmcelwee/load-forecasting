@@ -25,7 +25,7 @@ The biggest obstacle was the difference in daily peaks between winter and summer
 
 ### Software Details
 
-In order to incorporate the load forecast software into the OMF database, our model is written in Python. We use the pandas package to manipulate data, and we have implemented Tensorflow’s Keras (Google’s machine learning software) to create a neural network. ###Here is a link### to the repository. The code is easy to use:
+In order to incorporate the load forecast software into the OMF database, our model is written in Python. We use the pandas package to manipulate data, and we have implemented Tensorflow’s Keras (Google’s machine learning software) to create a neural network. [Here is a link](https://github.com/kmcelwee/load-forecasting) to the repository. The code is easy to use:
 
 ```python
 import loadForecast as fc

@@ -29,7 +29,12 @@ twitter_username: kevinrmcelwee
 github_username:  kmcelwee
 
 # Build settings
-theme: just-the-docs
+remote_theme: pmarsceill/just-the-docs
+
+domain: kmcelwee.com       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
+url: https://www.kmcelwee.com  # the base hostname and protocol for your site, e.g. http://example.com
+baseurl: /load-forecasting/      # place folder name if the site is served in a subfolder   
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.
