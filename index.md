@@ -7,7 +7,9 @@ permalink: /
 
 # An electric utility’s 3-part guide to peak shaving with neural networks.
 
-Forecasting technology has given utilities an opportunity to flatten their load curves, raising a whole new family of machine learning and statistical questions. Below are some solutions to important issues that utilities can use to save money.
+Increasing the accuracy of day-ahead load forecasting can save utilities 
+tens of thousands of dollars. Neural networks and other statistical techniques can help.
+Below are some proposed solutions to important problems that face utilities.
 
 This research was conducted in conjunction with the [Open Modeling Framework (OMF)](https://omf.coop/).
 These blog posts were originally posted in [Towards Data Science.](https://towardsdatascience.com/an-electric-utilitys-3-part-guide-to-peak-shaving-with-neural-networks-de5c7752d946)
