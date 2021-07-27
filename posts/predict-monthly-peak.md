@@ -42,11 +42,17 @@ Above is a forecast for the 20th of December in the north central region of Texa
 
 Considering that the model’s prediction is likely accurate around a normal distribution, we can assign a number to the statistical likelihood that tomorrow will be a local peak. It’s given by this formula:
 
-![](img/long_term_2.png)
+$$ P(X_1 > X_2) = 1 - P(X_1 - X_2 \leq 0) = 1 - \Phi\left(\frac{-\mu}{\sigma}\right) $$
 
-Given two normal distributions (subscripts 1 and 2, defined by their mean and standard deviation), what is the likelihood that the sample X₁ will be greater than the sample X₂.
 
-If you’re interested in the details, here’s a link to a full explanation. And below is how we expand that formula and translate it into python:
+$$ \mu := E(X_1 - X_2) = \mu_1 - \mu_2 $$
+
+
+$$ \sigma^2 := \text{Var}(X_1 - X_2) = \sigma_1^2 + \sigma_2^2 $$
+
+Given two normal distributions (subscripts 1 and 2, defined by their mean and standard deviation), what is the likelihood that the sample $$X_1$$ will be greater than the sample $$X_2$$.
+
+If you’re interested in the details, [here’s a link to a full explanation](https://math.stackexchange.com/questions/40224/probability-of-a-point-taken-from-a-certain-normal-distribution-will-be-greater). And below is how we translate that formula and implement it in python:
 
 ```python
 from scipy.stats import norm
