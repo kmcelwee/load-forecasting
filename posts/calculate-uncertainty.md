@@ -25,7 +25,7 @@ With this in mind, it’s important to consider what kind of dispatch strategies
 
 ### The Setup
 
-The 3D heat equation is shown below. 3Blue1Brown’s [introduction](https://www.youtube.com/watch?v=ly4S0oi3Yz8) to this topic served as the inspiration to this approach. For our purposes, all you need to know is that the heat equation is a convenient function to flatten curves while the area under the curve remains constant. We want to spread out our dispatches while still using all the resources available to us.
+The 3D heat equation is shown below. 3Blue1Brown’s [introduction](https://www.youtube.com/watch?v=ly4S0oi3Yz8) to this topic served as the inspiration for this approach. For our purposes, all you need to know is that the heat equation is a convenient function to flatten curves while the area under the curve remains constant. We want to spread out our dispatches while still using all the resources available to us.
 
 ![](img/heat_equ_2_3.png)
 
