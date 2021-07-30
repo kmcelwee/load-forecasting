@@ -13,11 +13,11 @@ permalink: /simple-load-forecasting
 
 Electricity distributors stand to save hundreds of thousands of dollars by decreasing their peak demand charge. Some have tried to discharge batteries or turn off customers’ water heaters or air conditioners at peak hours to reduce their demand. But these efforts are only as effective as the utility’s ability to predict the day’s energy consumption.
 
-The smallest inaccuracy can mean the difference between tens of thousands of dollars—implementing a peak-shaving strategy with incorrect load predictions can even increase demand cost. Thankfully, advances in deep learning and neural networks can offer utilities an incredibly accurate picture of the next day’s energy consumption. The Open Modeling Framework (OMF) and I have used neural networks to create a day-ahead load forecasting model that can be easily implemented to inform dispatch decisions.
+The smallest inaccuracy can mean the difference between tens of thousands of dollars—implementing a peak-shaving strategy with incorrect load predictions can even *increase* demand cost. Thankfully, advances in deep learning and neural networks can offer utilities an incredibly accurate picture of the next day’s energy consumption. The Open Modeling Framework (OMF) and I have used neural networks to create a day-ahead load forecasting model that can be easily implemented to inform dispatch decisions.
 
 ### Why not something simpler?
 
-We initially created a linear regression model with the python package sci-kit learn. Although this simpler model achieved 10 mean absolute percent error (MAPE), it was not accurate enough to reduce peaks reliably.
+We initially created a linear regression model with the python package [scikit-learn](https://scikit-learn.org/stable/). Although this simpler model achieved 10 mean absolute percent error (MAPE), it was not accurate enough to reduce peaks reliably.
 
 The biggest obstacle was the difference in daily peaks between winter and summer months. Winter months peaked twice a day and summer months peaked in the middle of the day. A linear model cannot create these two daily load shapes at the same time. While linear regression can find simple relationships (+500kW because it’s Monday, -100kW because it’s March), a neural network can calculate more complicated relationships (+5100kW because it’s 3pm on a Monday in April, -1500kW because it’s 5am on Thanksgiving). This reduced our training error to roughly 3.5 MAPE, which translated to tens of thousands of dollars saved.
 
@@ -46,19 +46,20 @@ The structure of the neural network is continually being updated as we search fo
 ### Inputs
 
 We recommend that the model train on at least three years of data. The model takes a CSV as input, where each row lists the load and weather for a given year, month, day, and hour. If a utility doesn’t have temperature data available, OMF also offers “weatherPull,” a program that can easily collect and return hourly weather for a given zip code. If there are any null temperature values, the load forecast function uses the “forward fill” method, where null values are replaced by the last non-null value. For example, “38, 39, 41, NaN, NaN, 38, NaN, 32” would be read as “38, 39, 41, 41, 41, 38, 38, 32.”
-Features
 
-Although each training example contains the date, temperature, and weather data, we expand these three columns into 72 features that are useful for a machine learning model. Here is a list of all features:
+### Features
+
+Although each training example contains the date, temperature, and weather data, we expand these three columns into 71 features that are useful for a machine learning model. Here is a list of all features:
 
 - Years since 2000*
 - Load from 24 hours before*
-- Hour of day (is12AM, is1AM, … is 11PM)
-- Day of the week (isSunday, isMonday, … isSaturday)
-- Month of the year (isJanuary, isFebruary, … is December)
+- Hour of day (`is12AM`, `is1AM`, … `is11PM`)
+- Day of the week (`isSunday`, `isMonday`, … `isSaturday`)
+- Month of the year (`isJanuary`, `isFebruary`, … `isDecember`)
 - Temperature* **
 - Temperature² ***
 - Previous day’s load* (12AM of day previous, 1AM of day previous, … 11PM of day previous)
-- Holidays (the NERC6 holidays)**** (isNewYears, isMemorialDay…isChristmas)
+- Holidays (the NERC6 holidays)**** (`isNewYears`, `isMemorialDay`, … `isChristmas`)
 
 \*These features are normalized by subtracting from the mean and dividing by the standard deviation, which helps collect all data points closely around zero. By dividing by the standard deviation instead of the range (as some data scientists suggest), we improved accuracy by one percent.
 
