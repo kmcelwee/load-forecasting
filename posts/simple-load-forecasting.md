@@ -61,7 +61,7 @@ Although each training example contains the date, temperature, and weather data,
 - Previous day’s load* (12AM of day previous, 1AM of day previous, … 11PM of day previous)
 - Holidays (the NERC6 holidays)**** (`isNewYears`, `isMemorialDay`, … `isChristmas`)
 
-\*These features are normalized by subtracting from the mean and dividing by the standard deviation, which helps collect all data points closely around zero. By dividing by the standard deviation instead of the range (as some data scientists suggest), we improved accuracy by one percent.
+\*These features are normalized by subtracting from the mean and dividing by the standard deviation, which helps collect all data points closely around zero. By dividing by the standard deviation instead of the range (as recommended when there are large outliers), we improved accuracy by one percent.
 
 \*\*The National Weather Service estimates that their day-ahead hourly weather forecast is often within 2.5 degrees. To replicate this, we create noise in the training and test temperature data by adding a gaussian distribution centered at zero with the standard deviation of 2.5. When this noise was added, the accuracy of the model dropped by one percent.
 
