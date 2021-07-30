@@ -8,8 +8,8 @@ permalink: /
 # An electric utility’s 3-part guide to peak shaving with neural networks.
 
 Increasing the accuracy of day-ahead load forecasting can save utilities 
-tens of thousands of dollars. Neural networks and other statistical techniques can help.
-Below are some proposed solutions to important problems that face utilities.
+tens of thousands of dollars. Below, I've proposed statistical solutions to key questions asked
+by utilities when implementing peak shaving strategies with storage.
 
 This research was conducted in conjunction with the [Open Modeling Framework (OMF)](https://omf.coop/).
 These blog posts were originally posted in [Towards Data Science.](https://towardsdatascience.com/an-electric-utilitys-3-part-guide-to-peak-shaving-with-neural-networks-de5c7752d946)
@@ -23,7 +23,7 @@ The smallest error can lose utilities thousands of dollars in a single day. Neur
 **Main takeaways**
 
 * To get any kind of useful energy consumption forecast, simple machine learning isn’t appropriate. Deep learning, however, can get us the accuracy we need.
-*  Given historical load and temperature data, a straightforward neural network can give a 24-hour forecast with about 97 percent accuracy.
+* Given historical load and temperature data, a straightforward neural network can give a 24-hour forecast with about 97 percent accuracy.
 
 ### [Predict daily electric consumption with neural networks.](day-long-load-forecasting.html)
 How a simple three-dimensional structure reduces error, outcompetes more complex models, and doubles savings.
@@ -54,8 +54,8 @@ How one 19th-century physics equation can increase electric utilities’ savings
 
 **Main takeaways:**
 
-* Because there’s inevitably errors in our forecast, the “optimal” dispatch solution for the forecast won’t necessarily be the best dispatch in practice.
+* Because there’re inevitably errors in our forecast, the “optimal” dispatch solution for the forecast won’t necessarily be the best dispatch in practice.
 * The heat equation can be used to spread out our dispatches (e.g. if our predicted forecast would suggest dispatching 500kW at 12pm, the equation might return 150kW at 11am, 200kW at 12pm, and 150kW at 1pm.)
-* This simple approach can save a lot of money. Savings in one region was increased by more than 60%.
+* This simple approach can save a lot of money. Savings in one region of Texas was increased by more than 60%.
 * The equation requires two constants as inputs, but they shouldn’t be hard for a utility to optimize.
 
