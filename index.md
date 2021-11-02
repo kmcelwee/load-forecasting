@@ -7,6 +7,8 @@ permalink: /
 
 # An electric utility’s 3-part guide to peak shaving with neural networks.
 
+*By [Kevin McElwee](https://www.kmcelwee.com)*
+
 Increasing the accuracy of day-ahead load forecasting can save utilities 
 tens of thousands of dollars. Below, I've proposed statistical solutions to key questions asked
 by utilities when implementing peak shaving strategies with storage.
